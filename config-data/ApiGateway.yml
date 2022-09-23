@@ -29,7 +29,4 @@ spring:
           uri: lb://BankClient
           predicates:
             - Path=/BankClient/** 
-        - id: bankwallet
-          uri: lb://bankwallet
-          predicates:
-            - Path=/bankwallet/**
+       
