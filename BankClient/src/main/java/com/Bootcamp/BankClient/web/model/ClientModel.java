@@ -43,10 +43,12 @@ public class ClientModel {
 	@NotBlank(message="Debe ingresar un estado")
     private int state;
     
-
-    private  Timestamp userCreate;
+    @JsonProperty("dateCreate")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private  Timestamp dateCreate;
     
-
-    private  Timestamp userUpdate;
+    @JsonProperty("dateUpdate")
+   	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private  Timestamp dateUpdate;
 
 }

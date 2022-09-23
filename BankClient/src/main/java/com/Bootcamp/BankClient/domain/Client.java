@@ -47,8 +47,8 @@ public class Client {
 	    private int state;
 	    
 
-	    private  Timestamp userCreate;
+	    private  Timestamp dateCreate;
 	    
 
-	    private  Timestamp userUpdate;
+	    private  Timestamp dateUpdate;
 }
