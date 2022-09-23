@@ -28,4 +28,8 @@ public class ProductModel {
     @JsonProperty("description")
     @NotBlank(message="La descripción no puede estar vacio")
     private String description;
+    
+    @JsonProperty("state")
+    @NotBlank(message="El estado no puede estar vacio")
+    private int  state;
 }
