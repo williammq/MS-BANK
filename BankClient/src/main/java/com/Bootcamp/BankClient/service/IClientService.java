@@ -10,7 +10,7 @@ public interface IClientService {
 
 	Mono<Client> findById(String id) throws Exception;
 	
-	Flux<Client>  findByDocumentNumber(String documentNumber) throws Exception;
+	Flux<Client>  findByNumberDocument(String numberDocument) throws Exception;
 		
 	Mono<Client> create(Client clientModel) throws Exception;
 

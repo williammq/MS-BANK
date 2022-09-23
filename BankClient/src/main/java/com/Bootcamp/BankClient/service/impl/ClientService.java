@@ -19,61 +19,29 @@ public class ClientService implements IClientService {
 	@Override
 	public Flux<Client> findAll() throws Exception {
 
-		return clientRepository.findAll().switchIfEmpty(Mono.error(RuntimeException::new));
-//		List<Client> clients = clientRepository.findAll();
-//		return clientMapper.clientsToClientModels(clients);
+		return clientRepository.findAll().filter(person -> person.getState() == 1).switchIfEmpty(Mono.error(new Throwable("No se encontraron resultados")));
 	}
 
 	@Override
 	public Mono<Client> findById(String id) throws Exception {
 
-		return clientRepository.findById(id).switchIfEmpty(Mono.error(RuntimeException::new));
-//		Optional<Client> client = clientRepository.findById(id);
-//		if (client.isPresent())
-//			return clientMapper.clientToClientModel(client.get());
-//		else
-//			throw new Exception("No se encontraron datos");
+		return clientRepository.findById(id).switchIfEmpty(Mono.error(new Throwable("No se encontraron resultados")));
 	}
 
 	@Override
 	public Mono<Client> create(Client client) throws Exception {
-		Flux<Client> var = clientRepository.findAll()
-				.filter(t -> t.getDocumentNumber().equals(client.getDocumentNumber()));
-		return var.collectList().flatMap(list -> {
-			if (!list.isEmpty()) {
+		Flux<Client> listClientExist = clientRepository.findByNumberDocument(client.getNumberDocument());
+		
+			if (listClientExist.next() != null) {
 				return Mono.error(new Throwable("El cliente ya existe"));
 			}
 			return clientRepository.save(client);
-		});
-//		return clientRepository.findByDocumentNumber(client.getDocumentNumber())
-//				.take(0).singleOrEmpty()
-//				.switchIfEmpty(clientRepository.save(client));
-
-//		List<Client> clients = clientRepository.findByDocumentNumber(clientModel.getDocumentNumber());
-//		Client client; 
-//		
-//		if (clients.isEmpty()) {
-//			 client = clientRepository.save(clientMapper.clientModelToClient(clientModel));
-//				return clientMapper.clientToClientModel(client);	
-//		}else {
-//			clientModel.setId("Ya existe el cliente");
-//			return clientModel;
-//		}
-
 	}
 
 	@Override
 	public Mono<Client> update(String id, Client client) throws Exception {
 		return clientRepository.findById(id).switchIfEmpty(Mono.error(() -> new Throwable("No existe cliente")))
 				.flatMap(t -> clientRepository.save(client));
-//		Optional<Client> clientOptional = clientRepository.findById(id);
-//
-//		if (clientOptional.isPresent()) {
-//			Client clientToUpdate = clientOptional.get();
-//			clientMapper.update(clientToUpdate, ClientModel);
-//			clientRepository.save(clientToUpdate);
-//		} else
-//			throw new Exception("No se encontraron datos");
 	}
 
 	@Override
@@ -82,10 +50,9 @@ public class ClientService implements IClientService {
 	}
 
 	@Override
-	public Flux<Client> findByDocumentNumber(String documentNumber) throws Exception {
+	public Flux<Client> findByNumberDocument(String numberDocument) throws Exception {
 
-		return clientRepository.findByDocumentNumber(documentNumber);
-//		List<Client> clients = clientRepository.findByDocumentNumber(documentNumber);
-//		return clientMapper.clientsToClientModels(clients);
+		return clientRepository.findByNumberDocument(numberDocument);
+
 	}
 }

@@ -35,10 +35,6 @@ public class ClientController {
 		log.debug(HttpStatus.OK.toString());
 		return clientService.findAll();
 		
-//		Flux<Client> response = clientService.findAll();
-//		log.info("getAll" + "OK");
-//		log.debug(response.toString());
-//		return new ResponseEntity<>(response, HttpStatus.OK);
 
 	}
 
@@ -49,10 +45,6 @@ public class ClientController {
 		log.info("getById OK");
 		log.debug(status.toString());
 		return new ResponseEntity<Mono<Client>>(client,status);
-//		Mono<Client> response = clientService.findById(id);
-//		log.info("getById" + "OK");
-//		log.debug(id);
-//		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@GetMapping(path = { "/find/{document}" }, produces = { "application/json" })
@@ -60,12 +52,9 @@ public class ClientController {
 	public Flux<Client> getByDocumentNumber(@PathVariable("document") String document) throws Exception {
 		log.info("getByDocumentNumber" + "OK");
 		log.debug(document);
-		return clientService.findByDocumentNumber(document);
+		return clientService.findByNumberDocument(document);
 		
-//		Flux<Client> response = clientService.findByDocumentNumber(document);
-//		log.info("getByNameAndDescription" + "OK");
-//		log.debug(response.toString());
-//		return new ResponseEntity<>(response, HttpStatus.OK);
+
 	}
 
 	@PostMapping("/create")
@@ -74,10 +63,6 @@ public class ClientController {
 		log.info("Create ok");
 		log.debug(client.toString());
 		return clientService.create(client);
-//		Mono<Client> response = clientService.create(client);
-//		log.info("create" + "OK");
-//		log.debug(client.toString());
-//		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@PutMapping(path = { "update/{id}" }, produces = { "application/json" })
@@ -86,10 +71,6 @@ public class ClientController {
 		log.info("update OK");
 		log.debug(id + "/" + client.toString());
 		return clientService.update(id, client);
-//		Mono<Client> response = clientService.update(id, client);
-//		log.info("update" + "OK");
-//		log.debug(id + "/" + client.toString());
-//		return new ResponseEntity<Object>(response, HttpStatus.OK);
 	}
 
 	@DeleteMapping({ "delete/{id}" })

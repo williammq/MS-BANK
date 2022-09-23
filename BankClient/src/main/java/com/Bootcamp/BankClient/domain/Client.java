@@ -1,9 +1,11 @@
 package com.Bootcamp.BankClient.domain;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -24,11 +26,29 @@ public class Client {
 	    @Id
 	    private String id;
 
-	    //private String clientProfileId;
-	    private List<ClientProfile> clientProfile;
+	    @NotNull
+	    private int  rolClient;   // 1= person  2= bussiness  3=both
 
+	    @NotNull
+	    private String typeDocument;
+	    
+	    @NotNull
 	    @Column(unique=true)
-	    private String documentNumber;
+	    private String numberDocument;
 
+	    @NotNull
 	    private String fullName;
+	    
+	    
+	    @NotNull
+	    private List<Product> listProduct;
+	    
+	    @NotNull
+	    private int state;
+	    
+
+	    private  Timestamp userCreate;
+	    
+
+	    private  Timestamp userUpdate;
 }

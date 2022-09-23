@@ -8,6 +8,7 @@ import reactor.core.publisher.Flux;
 
 public interface ClientRepository  extends ReactiveMongoRepository<Client, String> {
 
-	Flux<Client> findByDocumentNumber(String documentNumber);
-
+	Flux<Client> findByNumberDocument(String documentNumber);
+    
+	
 }
