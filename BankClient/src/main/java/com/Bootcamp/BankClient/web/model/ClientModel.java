@@ -38,15 +38,15 @@ public class ClientModel {
     private String fullName;
     
 	@NotBlank(message="Debe ingresar un producto")
-    private List<Product> listProduct;
+    private List<ProductModel> listProduct;
     
 	@NotBlank(message="Debe ingresar un estado")
     private int state;
     
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+
     private  Timestamp userCreate;
     
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+
     private  Timestamp userUpdate;
 
 }

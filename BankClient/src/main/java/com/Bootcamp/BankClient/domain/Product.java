@@ -15,7 +15,6 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "Product")
 public class Product {
     
     private String codeProduct;

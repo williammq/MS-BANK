@@ -22,7 +22,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 
-@RequestMapping("/v3/client")
+@RequestMapping("/v1/client")
 @Slf4j
 public class ClientController {
 	@Autowired

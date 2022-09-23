@@ -30,12 +30,8 @@ public class ClientService implements IClientService {
 
 	@Override
 	public Mono<Client> create(Client client) throws Exception {
-		Flux<Client> listClientExist = clientRepository.findByNumberDocument(client.getNumberDocument());
-		
-			if (listClientExist.next() != null) {
-				return Mono.error(new Throwable("El cliente ya existe"));
-			}
 			return clientRepository.save(client);
+		
 	}
 
 	@Override
